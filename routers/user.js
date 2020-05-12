@@ -2,7 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/User')
 const auth = require('../middleware/auth')
-
+//Kerry
 router.post('/', async (req, res) => {
     const user = new User(req.body)
     try{
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         res.status(400).send(error.message)
     }
 })
-
+//Kerry
 router.post('/logout', auth, async (req, res) => {
     try{
         req.user.tokens = []
@@ -25,7 +25,7 @@ router.post('/logout', auth, async (req, res) => {
         res.status(500).send()
     }
 })
-
+//Kerry
 router.post('/login', async (req, res) => {
     try{
         const user = await User.findByCredentials(req.body.email, req.body.password)
@@ -36,11 +36,11 @@ router.post('/login', async (req, res) => {
         res.status(400).send()
     }
 })
-
+//Kerry
 router.get('/me', auth, (req, res) => {
     res.send(req.user)
 })
-
+//Nicholas
 router.get('/admin/allusers', auth,  async (req, res) => {
     try{
         const users = await User.find()
@@ -50,7 +50,7 @@ router.get('/admin/allusers', auth,  async (req, res) => {
         res.status(500).send(error)
     }   
 })
-
+//Kerry
 router.delete('/me', auth, async (req, res) => {
     try{
         await req.user.remove() 
@@ -60,7 +60,7 @@ router.delete('/me', auth, async (req, res) => {
         res.status(500).send()
     }
 })
-
+//Nicholas
 router.delete('/admin/:id', auth, async (req, res) => {
     try{
         const user = await User.findOneAndDelete({_id: req.params.id})
