@@ -2,7 +2,7 @@ const express = require('express')
 const router = new express.Router()
 const Book = require('../models/Book')
 const auth = require('../middleware/auth')
-
+//Kerry
 router.post('/', auth, async (req, res) => {    
     const book = new Book({
         ...req.body,
@@ -17,7 +17,7 @@ router.post('/', auth, async (req, res) => {
         res.status(400).send(error)
     }
 })
-
+//Kerry
 router.get('/me', auth,  async (req, res) => {
         try{
             const books = await Book.find({owner: req.user._id})
@@ -27,7 +27,7 @@ router.get('/me', auth,  async (req, res) => {
             res.status(500).send(error)
         }   
 })
-
+//Kerry
 router.get('/allbooks', auth,  async (req, res) => {
     try{
         const books = await Book.find()
@@ -37,7 +37,7 @@ router.get('/allbooks', auth,  async (req, res) => {
         res.status(500).send(error)
     }   
 })
-
+//Kerry
 router.delete('/:id', auth, async (req, res) => {
     try{
         const book = await Book.findOneAndDelete({_id: req.params.id, owner: req.user._id })
@@ -50,7 +50,7 @@ router.delete('/:id', auth, async (req, res) => {
         res.status(500).send()
     }
 })
-
+//Nicholas
 router.delete('/admin/:id', auth, async(req, res) => {
     try{
         const book = await Book.findOneAndDelete({_id: req.params.id})
